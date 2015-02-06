@@ -102,6 +102,10 @@ module QbertBot
   class Web < Sinatra::Base
     set :port, proc { Robot.instance.router.port }
     set :bind, proc { Robot.instance.router.bind }
+    set :environment, :production
+    set :root, proc { Dir.pwd }
+    set :public_folder, Proc.new { File.join(root, "static") }
+    disable :logging
 
     get(//) do
       Robot.instance.handle_web(:get, request, params)

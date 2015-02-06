@@ -12,5 +12,11 @@ module QbertBot
     attr_accessor :bot, :slack, :router, :scheduler
     def register
     end
+
+    def help
+      [
+        []
+      ]
+    end
   end
 end
