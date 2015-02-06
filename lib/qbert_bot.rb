@@ -5,6 +5,7 @@ require "qbert_bot/router"
 require "qbert_bot/slack"
 require "qbert_bot/robot"
 require "qbert_bot/core/help"
+require "qbert_bot/core/healthcheck"
 
 
 
