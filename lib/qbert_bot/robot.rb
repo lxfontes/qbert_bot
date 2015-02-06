@@ -42,12 +42,12 @@ module QbertBot
       @listeners << Listener.new(pattern, block)
     end
 
-    def handle_web(method, request, params)
+    def handle_web(method, request, params, response)
       if method == :post && request.path_info == @router.endpoint
         return handle_slack(params)
       end
 
-      @router.exec_route(method, request, params)
+      @router.exec_route(method, request, params, response)
     end
 
     def handle_slack(params)
@@ -108,11 +108,11 @@ module QbertBot
     disable :logging
 
     get(//) do
-      Robot.instance.handle_web(:get, request, params)
+      Robot.instance.handle_web(:get, request, params, self)
     end
 
     post(//) do
-      Robot.instance.handle_web(:post, request, params)
+      Robot.instance.handle_web(:post, request, params, self)
     end
   end
 end

@@ -19,11 +19,12 @@ module QbertBot
       add_route(:post, path, &block)
     end
 
-    def exec_route(method, request, params)
+    def exec_route(method, request, params, response)
       @routes.each do |route|
         next unless route.method == method
         next unless match = request.path_info.match(route.path)
-        return route.proc.call(request, params, match)
+        params[:route_matches] = match
+        return route.proc.call(request, params, response)
       end
       return 'no route'
     end
