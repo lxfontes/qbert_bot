@@ -8,15 +8,19 @@ Gem::Specification.new do |spec|
   spec.version       = QbertBot::VERSION
   spec.authors       = ["lxfontes"]
   spec.email         = ["lxfontes@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{The no frills ruby bot for Slack}
+  spec.description   = %q{}
+  spec.homepage      = "http://github.com/lxfontes/qbert_bot"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0")
+  spec.files         = Dir.glob("{bin,lib}/**/*")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
+
+  spec.add_dependency 'rufus-scheduler', '~> 3.0'
+  spec.add_dependency 'sinatra', '~> 1.4'
+  spec.add_dependency 'faraday', '~> 0.9'
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
