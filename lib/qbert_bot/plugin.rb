@@ -3,7 +3,6 @@ module QbertBot
     def self.included(klass)
       @plugins ||= []
       @plugins << klass
-      puts "Loading plugin #{klass}"
     end
 
     def self.plugins

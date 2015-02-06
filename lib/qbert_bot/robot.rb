@@ -21,7 +21,7 @@ module QbertBot
 
   class Robot
     include Singleton
-    attr_reader :config, :slack, :router, :scheduler
+    attr_reader :config, :slack, :router, :scheduler, :plugins, :listeners
 
     def initialize
       @plugins = []
@@ -39,7 +39,6 @@ module QbertBot
     end
 
     def hear(pattern, &block)
-      puts("Adding #{pattern.source}")
       @listeners << Listener.new(pattern, block)
     end
 
@@ -72,6 +71,7 @@ module QbertBot
 
     def load_plugins
       Plugin.plugins.each do |klass|
+        puts("Loading #{klass}")
         p = klass.new
         p.bot = self
         p.router = router
@@ -90,10 +90,8 @@ module QbertBot
     end
 
     def find_listener(msg)
-      puts("Checking '#{msg.text}'")
       @listeners.each do |l|
         if match = msg.text.match(l.pattern)
-          puts("Found '#{l.pattern.source}'")
           return Match.new(l, match)
         end
       end

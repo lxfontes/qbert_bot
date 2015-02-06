@@ -40,7 +40,6 @@ module QbertBot
         clean_path = "#{clean_path}$" unless clean_path[-1, 1] == '$'
       end
 
-      puts("Adding route for #{method} #{clean_path}")
       @routes << Route.new(method, Regexp.new(clean_path), block)
     end
   end

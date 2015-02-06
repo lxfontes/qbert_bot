@@ -4,6 +4,7 @@ require "qbert_bot/message"
 require "qbert_bot/router"
 require "qbert_bot/slack"
 require "qbert_bot/robot"
+require "qbert_bot/core/help"
 
 
 
@@ -12,7 +13,7 @@ module QbertBot
     bot = Robot.instance
     bot.load_config
 
-    Dir['plugins/*.rb'].each do |f|
+    Dir['plugin/*.rb'].each do |f|
       load f
     end
 
